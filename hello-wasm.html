@@ -1,49 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page Title</title>
+  <title>Wasm + Rust Fibonacci Demo</title>
 </head>
 <body>
-  <script type="module">
-    const delayMs = 1000;
-    import init, { fibonacci } from './pkg/hello_wasm.js';
-
-    function fib2 (n) {
-      if (n < 0) {
-        console.error('Cannot compute');
-        return '?';
-      }
-      switch (n) {
-        case 0: return 0;
-        case 1: return 1;
-        default: return fib2(n - 1) + fib2(n - 2);
-      }
-    }
-
-    function checkInput () {
-      let currentVal = document.getElementById('fibInput').value;
-      if (currentVal != checkInput.lastVal) {
-        checkInput.lastVal = currentVal;
-        document.getElementById('fibInput').disabled = true;
-        document.getElementById('result').innerHTML = "Result: Working...";
-        (async () => fib2(currentVal))().then(v => {
-          document.getElementById('result').innerHTML = 'Result: ' + v;
-          document.getElementById('fibInput').disabled = false;
-        });
-      }
-    }
-    checkInput.lastVal = null;
-
-    (async () => {
-      //await init();
-      console.log(fib2(12));
-      setInterval(checkInput, delayMs);
-    })()
-  </script>
-
   <h1>Fibonacci with Rust/WASM</h1>
   <label for="fibInput">Enter a number:</label><br>
   <input id="fibInput" name="fibInput" type="number" min="0"/><br>
-  <p id="result"></p>
+  <p id="result1"></p>
+  <p id="result2"></p>
 </body>
 </html>
